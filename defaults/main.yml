@@ -1,2 +1,11 @@
 ---
 # defaults file for buildkite-agent
+debian_family_distros:
+  - Ubuntu
+  - Debian
+  - Pop!_OS
+
+centos_family_distros:
+  - CentOS
+  - Amazon
+  - OracleLinux
