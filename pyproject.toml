@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "ansible-buildkite-agent"
+version = "0.1.0"
+description = "Ansible playbook to configure a buildkite-agent"
+authors = ["Vitor Pellegrino <vitor@pellegrino.io>"]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+ansible = "^4.3.0"
+
+[tool.poetry.dev-dependencies]
+molecule = {extras = ["docker"], version = "^3.3.4"}
+ansible-lint = "^5.1.2"
+yamllint = "^1.26.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,24 @@
+galaxy_info:
+  author: Vitor Pellegrino
+  description: Playbook to install and configure a buildkite-agent
+  license: MIT
+
+  min_ansible_version: "2.4"
+  platforms:
+  - name: Fedora
+    versions:
+    - any
+  - name: Debian
+    versions:
+    - any
+  - name: Ubuntu
+    versions:
+      - any
+  - name: EL
+    versions:
+      - any
+
+  galaxy_tags: 
+    - ci
+
+dependencies: []
