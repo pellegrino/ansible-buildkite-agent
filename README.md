@@ -1,5 +1,7 @@
 # Ansible Role: buildkite-agent
 
+[![CI](https://github.com/pellegrino/ansible-buildkite-agent/workflows/CI/badge.svg?event=push)](https://github.com/pellegrino/ansible-buildkite-agent/actions?query=workflow%3ACI)
+
 Installs a buildkite-agent on a RedHat/CentOS/OracleOS Linux or Debian/Ubuntu Linux servers.
 
 ## Requirements
