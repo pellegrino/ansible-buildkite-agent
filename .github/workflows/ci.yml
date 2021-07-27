@@ -29,7 +29,7 @@ jobs:
           python-version: '3.x'
 
       - name: Install test dependencies.
-        run: pip3 install yamllint ansible-lint
+        run: pip3 install yamllint ansible-lint ansible
 
       - name: Lint code.
         run: |
@@ -44,7 +44,7 @@ jobs:
         distro:
           - centos7
           - ubuntu1804
-          
+
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
