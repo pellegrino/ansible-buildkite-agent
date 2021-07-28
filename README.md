@@ -1,4 +1,6 @@
-# Ansible Role: buildkite-agent
+# WIP Ansible Role: buildkite-agent
+
+not usable yet
 
 [![CI](https://github.com/pellegrino/ansible-buildkite-agent/workflows/CI/badge.svg?event=push)](https://github.com/pellegrino/ansible-buildkite-agent/actions?query=workflow%3ACI)
 
@@ -7,6 +9,17 @@ Installs a buildkite-agent on a RedHat/CentOS/OracleOS Linux or Debian/Ubuntu Li
 ## Requirements
 
 Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+
+## Supports
+
+This playbook is continuously tested using Molecule for the following distros:
+
+- centos8
+- debian10
+- debian9
+- fedora32
+- ubuntu1804
+- ubuntu2004
 
 ## Role Variables
 
