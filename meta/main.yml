@@ -1,9 +1,11 @@
 galaxy_info:
-  author: Vitor Pellegrino
   description: Playbook to install and configure a buildkite-agent
-  license: MIT
+  license: license (MIT)
+  role_name: buildkiteagent
+  author: pellegrino
+  company: ""
 
-  min_ansible_version: "2.4"
+  min_ansible_version: "2.9"
   platforms:
   - name: Fedora
     versions:
@@ -20,5 +22,7 @@ galaxy_info:
 
   galaxy_tags:
     - ci
+    - buildkite
+    - buildkiteagent
 
 dependencies: []

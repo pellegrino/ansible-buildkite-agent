@@ -3,8 +3,12 @@
 
 - name: Verify
   hosts: all
-  gather_facts: false
+  gather_facts: True
   tasks:
-  - name: Example assertion
-    assert:
-      that: true
+  - name: Gather the package facts
+    ansible.builtin.package_facts:
+      manager: auto
+
+  - name: Check if 'nginx' is installed
+    ansible.builtin.assert:
+      that: "'nginx' in ansible_facts.packages"
