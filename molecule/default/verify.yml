@@ -4,11 +4,15 @@
 - name: Verify
   hosts: all
   gather_facts: True
-  tasks:
-  - name: Gather the package facts
-    ansible.builtin.package_facts:
-      manager: auto
 
-  - name: Check if 'nginx' is installed
-    ansible.builtin.assert:
-      that: "'nginx' in ansible_facts.packages"
+  tasks:
+    - name: reload systemd daemon
+      systemd:
+        daemon_reload: true
+
+    - name: Gather the service facts
+      ansible.builtin.service_facts:
+
+    - name: Check if buildkite-agent system is present
+      ansible.builtin.assert:
+        that: "'buildkite-agent' in ansible_facts.services"

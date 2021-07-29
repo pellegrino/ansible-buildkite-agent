@@ -1,0 +1,21 @@
+[Unit]
+Description=Buildkite Agent
+Documentation=https://buildkite.com/agent
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User={{ buildkite_agent_user }}
+Group={{ buildkite_agent_group }}
+Environment=HOME={{ buildkite_agent_home_path }}
+ExecStart={{ buildkite_agent_bin_path }}/buildkite-agent start --config {{ buildkite_agent_config_path }}/buildkite-agent.cfg
+RestartSec=5
+Restart=on-failure
+RestartForceExitStatus=SIGPIPE
+TimeoutStartSec=10
+TimeoutStopSec=0
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

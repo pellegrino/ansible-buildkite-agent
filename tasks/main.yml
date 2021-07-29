@@ -1,18 +1,177 @@
 ---
-# tasks file for buildkite-agent
+- name: Check if a private ssh-key is present
+  stat:
+    path: "{{ buildkite_agent_private_ssh_key_path }}"
+  delegate_to: localhost
+  register: private_ssh_key
 
-- name: Debian | Install nginx
-  become: true
-  apt:
-    name: nginx
+- name: Check if a public ssh-key is present
+  stat:
+    path: "{{ buildkite_agent_public_ssh_key_path }}"
+  delegate_to: localhost
+  register: public_ssh_key
+
+- name: Generate the agent's ssh-keys
+  community.crypto.openssh_keypair:
+    path: "{{ buildkite_agent_private_ssh_key_path }}"
+    size: 4096
+    type: rsa
+  when: not private_ssh_key.stat.exists
+  delegate_to: localhost
+
+- name: Create buidlkite-agent group
+  group:
+    name: "{{ buildkite_agent_group }}"
     state: present
-    update_cache: true
-  when: ansible_distribution in debian_family_distros or ansible_distribution == 'ArchLinux'
 
-- name: CentOS | Install nginx
+- name: Create buildkite user
+  user:
+    name: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+    home: "{{ buildkite_agent_home_path }}"
+    shell: /bin/bash
+    state: present
+
+- name: create buildkite directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    mode: 0755
+    owner: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+  loop:
+    - "{{ buildkite_agent_home_path }}"
+    - "{{ buildkite_agent_home_path }}/.ssh"
+    - "{{ buildkite_agent_hooks_path }}"
+    - "{{ buildkite_agent_config_path }}"
+    - "{{ buildkite_agent_builds_path }}"
+    - "{{ buildkite_agent_plugins_path }}"
+    - "{{ buildkite_agent_bin_path }}"
+
+- name: copy private ssh-key to the agents
+  copy:
+    src: "{{ buildkite_agent_private_ssh_key_path }}"
+    dest: "{{ buildkite_agent_home_path }}/.ssh"
+    owner: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+    mode: 0600
+
+- name: CentOS | Install dependencies
   become: true
   yum:
-    name: nginx
+    name: "{{ item }}"
     state: present
-    update_cache: true
+    update_cache: yes
+  loop:
+    - git
   when: ansible_distribution in centos_family_distros
+
+- name: Debian | Install dependencies
+  become: true
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  loop:
+    - git
+  when: ansible_distribution in debian_family_distros
+
+- name: copy public ssh-key to the agents
+  copy:
+    src: "{{ buildkite_agent_public_ssh_key_path }}"
+    dest: "{{ buildkite_agent_home_path }}/.ssh"
+    owner: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+    mode: 0644
+
+- name: aarch64 | Downloads buildkite-agent release
+  get_url:
+    url: https://github.com/buildkite/agent/releases/download/v{{ buildkite_agent_release }}/buildkite-agent-linux-arm64-{{ buildkite_agent_release }}.tar.gz
+    dest: "/tmp/buildkite_agent_{{ buildkite_agent_release }}.tar.gz"
+  register: buildkite_agent_archive
+  when: ansible_architecture == "aarch64"
+
+- name: x86_64 | Downloads buildkite-agent release
+  get_url:
+    url: https://github.com/buildkite/agent/releases/download/v{{ buildkite_agent_release }}/buildkite-agent-linux-amd64-{{ buildkite_agent_release }}.tar.gz
+    dest: "/tmp/buildkite_agent_{{ buildkite_agent_release }}.tar.gz"
+  register: buildkite_agent_archive
+  when: ansible_architecture == "x86_64"
+
+- name: Extracts buildkite-agent
+  unarchive:
+    src: "/tmp/buildkite_agent_{{ buildkite_agent_release }}.tar.gz"
+    dest: "/tmp"
+    creates: "/tmp/bootstrap.sh"
+    owner: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+    remote_src: true
+# move files to the right places
+- name: Copy extracted files to the right places
+  copy:
+    remote_src: true
+    src: "{{ item.path }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+    mode: 0755
+  loop:
+    - {
+        path: "/tmp/bootstrap.sh",
+        dest: "{{ buildkite_agent_bin_path }}/bootstrap.sh",
+      }
+    - {
+        path: "/tmp/buildkite-agent",
+        dest: "{{ buildkite_agent_bin_path }}/buildkite-agent",
+      }
+
+- name: Create buildkite agent configuration
+  template:
+    src: buildkite-agent.cfg.j2
+    dest: "{{ buildkite_agent_config_path }}/buildkite-agent.cfg"
+    owner: "{{ buildkite_agent_user }}"
+    group: "{{ buildkite_agent_group }}"
+    mode: 0755
+  notify:
+    - restart buildkite-agent service
+
+- name: Create buildkite-agent system service
+  template:
+    src: buildkite-agent.service.j2
+    dest: /etc/systemd/system/buildkite-agent.service
+    mode: 0755
+    backup: true
+  notify:
+    - reload systemd daemon
+    - restart buildkite-agent service
+- name: creates hooks
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ buildkite_agent_hooks_path }}/{{ item }}"
+    mode: 0755
+    backup: true
+  loop:
+    - "{{ buildkite_agent_template_hook_checkout }}"
+    - "{{ buildkite_agent_template_hook_command }}"
+    - "{{ buildkite_agent_template_hook_environment }}"
+    - "{{ buildkite_agent_template_hook_post_artifact }}"
+    - "{{ buildkite_agent_template_hook_post_checkout }}"
+    - "{{ buildkite_agent_template_hook_post_command }}"
+    - "{{ buildkite_agent_template_hook_pre_artifact }}"
+    - "{{ buildkite_agent_template_hook_pre_checkout }}"
+    - "{{ buildkite_agent_template_hook_pre_command }}"
+    - "{{ buildkite_agent_template_hook_pre_exit }}"
+  notify:
+    - restart buildkite-agent service
+
+- name: Start and enable buildkite-agent system service
+  service:
+    name: buildkite-agent
+    state: started
+    enabled: true
+# ## options
+# - name: Configure telemetry
+
+# ## testing
+
+# - name: assert that the agent is running

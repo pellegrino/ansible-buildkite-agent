@@ -1,2 +1,15 @@
 ---
 # vars file for buildkite-agent
+buildkite_agent_token: __agent_token_here__
+buildkite_agent_debug: false # set true for debug
+buildkite_agent_tags: "ci=true,docker=true"
+buildkite_agent_release: 3.31.0
+
+buildkite_agent_tags_from_ec2: false
+buildkite_agent_tags_from_ec2_tags: false
+buildkite_agent_tags_from_gcp: false
+buildkite_agent_tags_from_gcp_labels: false
+buildkite_agent_tags_from_host: false
+
+buildkite_agent_private_ssh_key_path: "{{ playbook_dir }}/../../files/id_rsa"
+buildkite_agent_public_ssh_key_path: "{{ playbook_dir }}/../../files/id_rsa.pub"

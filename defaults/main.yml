@@ -9,3 +9,26 @@ centos_family_distros:
   - CentOS
   - Amazon
   - OracleLinux
+
+buildkite_agent_user: buildkite-agent
+buildkite_agent_group: buildkite-agent
+buildkite_agent_home_path: /var/lib/buildkite-agent
+buildkite_agent_name: buildkite-agent
+buildkite_agent_config_path: /etc/buildkite-agent
+buildkite_agent_hooks_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/hooks"
+buildkite_agent_builds_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/builds"
+buildkite_agent_plugins_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/plugins"
+buildkite_agent_bin_path: "{{ buildkite_agent_home_path }}/bin"
+
+## hooks templates - names of templates.
+# Expects every hook to end in .j2, but the values cannot have it
+buildkite_agent_template_hook_checkout: checkout.sample # assumes file lives in hooks/ without .j2 file extension
+buildkite_agent_template_hook_command: command.sample # assumes file lives in hooks/ without .j2 file extension
+buildkite_agent_template_hook_environment: environment.sample # assumes file lives in hooks/ without .j2 file extension
+buildkite_agent_template_hook_post_artifact: post-artifact.sample
+buildkite_agent_template_hook_post_checkout: post-checkout.sample
+buildkite_agent_template_hook_post_command: post-command.sample
+buildkite_agent_template_hook_pre_artifact: pre-artifact.sample
+buildkite_agent_template_hook_pre_checkout: pre-checkout.sample
+buildkite_agent_template_hook_pre_command: pre-command.sample
+buildkite_agent_template_hook_pre_exit: pre-exit.sample
