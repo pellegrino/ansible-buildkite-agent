@@ -2,7 +2,7 @@
 
 not usable yet
 
-[![CI](https://github.com/pellegrino/ansible-buildkite-agent/workflows/CI/badge.svg?event=push)](https://github.com/pellegrino/ansible-buildkite-agent/actions?query=workflow%3ACI)
+[![Main](https://github.com/pellegrino/ansible-buildkite-agent/workflows/main/badge.svg?event=push)](https://github.com/pellegrino/ansible-buildkite-agent/actions?query=workflow%3Amain)
 
 Installs a buildkite-agent on a RedHat/CentOS/OracleOS Linux or Debian/Ubuntu Linux servers.
 
@@ -27,6 +27,12 @@ Doesn't support windows or mac hosts yet.
 
 A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
+Required var:
+
+- buildkite_agent_token: YOUR AGENT TOKEN.
+
+You may use ansible-vault or another secret management solution such as hashicorp vault to encrypt your buildkite agent token and handle this information securely.
+
 ## Dependencies
 
 A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
@@ -37,7 +43,9 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - role: pellegrino.buildkiteagent
+           vars:
+             buildkite_agent_token: __YOUR_TOKEN_HERE__
 
 ## License
 
