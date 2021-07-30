@@ -2,7 +2,7 @@
 
 not usable yet
 
-[![Main](https://github.com/pellegrino/ansible-buildkite-agent/workflows/main/badge.svg?event=push)](https://github.com/pellegrino/ansible-buildkite-agent/actions?query=workflow%3Amain)
+[![Main](https://github.com/pellegrino/ansible-buildkite-agent/workflows/Main/badge.svg?event=push)](https://github.com/pellegrino/ansible-buildkite-agent/actions?query=workflow%3AMain)
 
 Installs a buildkite-agent on a RedHat/CentOS/OracleOS Linux or Debian/Ubuntu Linux servers.
 
