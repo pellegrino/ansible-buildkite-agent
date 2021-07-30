@@ -20,6 +20,12 @@ buildkite_agent_builds_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/b
 buildkite_agent_plugins_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/plugins"
 buildkite_agent_bin_path: "{{ buildkite_agent_home_path }}/bin"
 
+buildkite_agent_tags_from_ec2: false
+buildkite_agent_tags_from_ec2_tags: false
+buildkite_agent_tags_from_gcp: false
+buildkite_agent_tags_from_gcp_labels: false
+buildkite_agent_tags_from_host: false
+
 ## hooks templates - names of templates.
 # Expects every hook to end in .j2, but the values cannot have it
 buildkite_agent_template_hook_checkout: checkout.sample # assumes file lives in hooks/ without .j2 file extension

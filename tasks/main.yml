@@ -47,6 +47,7 @@
     - "{{ buildkite_agent_builds_path }}"
     - "{{ buildkite_agent_plugins_path }}"
     - "{{ buildkite_agent_bin_path }}"
+    - /tmp/buildkite-agent
 
 - name: copy private ssh-key to the agents
   copy:
@@ -56,7 +57,7 @@
     group: "{{ buildkite_agent_group }}"
     mode: 0600
 
-- name: CentOS | Install dependencies
+- name: CentOS | Install dependencies (git)
   become: true
   yum:
     name: "{{ item }}"
@@ -66,7 +67,7 @@
     - git
   when: ansible_distribution in centos_family_distros
 
-- name: Debian | Install dependencies
+- name: Debian | Install dependencies (git)
   become: true
   apt:
     name: "{{ item }}"
@@ -101,8 +102,8 @@
 - name: Extracts buildkite-agent
   unarchive:
     src: "/tmp/buildkite_agent_{{ buildkite_agent_release }}.tar.gz"
-    dest: "/tmp"
-    creates: "/tmp/bootstrap.sh"
+    dest: "/tmp/buildkite-agent"
+    creates: "/tmp/buildkite-agent/bootstrap.sh"
     owner: "{{ buildkite_agent_user }}"
     group: "{{ buildkite_agent_group }}"
     remote_src: true
@@ -117,11 +118,11 @@
     mode: 0755
   loop:
     - {
-        path: "/tmp/bootstrap.sh",
+        path: "/tmp/buildkite-agent/bootstrap.sh",
         dest: "{{ buildkite_agent_bin_path }}/bootstrap.sh",
       }
     - {
-        path: "/tmp/buildkite-agent",
+        path: "/tmp/buildkite-agent/buildkite-agent",
         dest: "{{ buildkite_agent_bin_path }}/buildkite-agent",
       }
 
@@ -169,9 +170,3 @@
     name: buildkite-agent
     state: started
     enabled: true
-# ## options
-# - name: Configure telemetry
-
-# ## testing
-
-# - name: assert that the agent is running

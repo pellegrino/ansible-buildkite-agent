@@ -4,7 +4,9 @@
 - name: Verify
   hosts: all
   gather_facts: True
-
+  vars:
+    buildkite_agent_private_ssh_key_path: "{{ playbook_dir }}/files/id_rsa"
+    buildkite_agent_public_ssh_key_path: "{{ playbook_dir }}/files/id_rsa.pub"
   tasks:
     - name: reload systemd daemon
       systemd:

@@ -1,19 +1,13 @@
 ---
-name: CI
-'on':
+name: Pull Requests
+"on":
   pull_request:
-  push:
-    branches:
-      - main
-  schedule:
-    - cron: "0 2 * * 3"
 
 defaults:
   run:
-    working-directory: 'pellegrino.buildkiteagent'
+    working-directory: "pellegrino.buildkiteagent"
 
 jobs:
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
@@ -21,20 +15,19 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'pellegrino.buildkiteagent'
+          path: "pellegrino.buildkiteagent"
           token: ${{ github.token }}
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
+          python-version: "3.x"
 
       - name: Caches python packages
         uses: actions/cache@v2
         with:
           path: ~/.cache/pip
           key: ${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('**/pyproject.toml') }}
-
 
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
@@ -62,14 +55,13 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'pellegrino.buildkiteagent'
+          path: "pellegrino.buildkiteagent"
           token: ${{ github.token }}
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
         with:
-          python-version: '3.x'
-
+          python-version: "3.x"
 
       - name: Caches python packages
         uses: actions/cache@v2
@@ -77,15 +69,13 @@ jobs:
           path: ~/.cache/pip
           key: ${{ hashFiles('**/poetry.lock') }}-molecule-${{ hashFiles('**/pyproject.toml') }}
 
-
       - name: Install dependencies
         if: steps.cache.outputs.cache-hit != 'true'
         run: pip3 install ansible molecule[docker] docker
 
-
       - name: Run Molecule tests.
         run: molecule test
         env:
-          PY_COLORS: '1'
-          ANSIBLE_FORCE_COLOR: '1'
+          PY_COLORS: "1"
+          ANSIBLE_FORCE_COLOR: "1"
           MOLECULE_DISTRO: ${{ matrix.distro }}
