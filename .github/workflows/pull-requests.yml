@@ -8,8 +8,8 @@ defaults:
     working-directory: "pellegrino.buildkiteagent"
 
 jobs:
-  lint:
-    name: Lint
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Check out the codebase.
@@ -38,10 +38,10 @@ jobs:
           yamllint .
           ansible-lint
 
-  molecule:
-    name: Molecule
+  test:
+    name: Molecule tests
     runs-on: ubuntu-latest
-    needs: lint
+    needs: build
     strategy:
       matrix:
         distro:
