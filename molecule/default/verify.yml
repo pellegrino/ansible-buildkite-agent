@@ -4,9 +4,6 @@
 - name: Verify
   hosts: all
   gather_facts: True
-  vars:
-    buildkite_agent_private_ssh_key_path: "{{ playbook_dir }}/files/id_rsa"
-    buildkite_agent_public_ssh_key_path: "{{ playbook_dir }}/files/id_rsa.pub"
   tasks:
     - name: reload systemd daemon
       systemd:
@@ -17,4 +14,4 @@
 
     - name: Check if buildkite-agent system is present
       ansible.builtin.assert:
-        that: "'buildkite-agent' in ansible_facts.services"
+        that: "'buildkite-agent.service' in ansible_facts.services"

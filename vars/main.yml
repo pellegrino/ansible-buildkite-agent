@@ -1,6 +1,10 @@
 ---
-# vars file for buildkite-agent
+# Varaibles that a user may want to motify
+
+# Required variables
 buildkite_agent_token: __agent_token_here__
+
+# Optional variables
 buildkite_agent_debug: false # set true for debug
 buildkite_agent_tags: "ci=true,docker=true"
 buildkite_agent_release: 3.31.0

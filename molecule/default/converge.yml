@@ -1,10 +1,10 @@
 ---
 - name: Converge
   hosts: all
-  vars:
-    buildkite_agent_private_ssh_key_path: "{{ playbook_dir }}/files/id_rsa"
-    buildkite_agent_public_ssh_key_path: "{{ playbook_dir }}/files/id_rsa.pub"
   tasks:
     - name: "Include buildkiteagent"
       include_role:
         name: "pellegrino.buildkiteagent"
+      vars:
+        buildkite_agent_private_ssh_key_path: "{{ playbook_dir }}/id_rsa"
+        buildkite_agent_public_ssh_key_path: "{{ playbook_dir }}/id_rsa.pub"
