@@ -302,20 +302,20 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "molecule"
-version = "3.3.4"
+version = "3.4.0"
 description = "Molecule aids in the development and testing of Ansible roles"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-ansible-lint = ">=5.0.12"
+ansible-lint = ">=5.1.1"
 cerberus = ">=1.3.1,<1.3.3 || >1.3.3,<1.3.4 || >1.3.4"
 click = ">=8.0,<9"
 click-help-colors = ">=0.9"
 cookiecutter = ">=1.7.3"
 enrich = ">=1.2.5"
-Jinja2 = ">=2.10.1"
+Jinja2 = ">=2.11.3"
 molecule-docker = {version = "*", optional = true, markers = "extra == \"docker\""}
 packaging = "*"
 paramiko = ">=2.5.0,<3"
@@ -332,7 +332,7 @@ docker = ["molecule-docker"]
 docs = ["Sphinx (>=4.0.2)", "simplejson (>=3.17.2)", "sphinx-notfound-page (>=0.7.1)", "sphinx-ansible-theme (>=0.2.2)"]
 lint = ["flake8 (>=3.8.4)", "pre-commit (>=2.10.1)", "yamllint"]
 podman = ["molecule-podman"]
-test = ["ansi2html (>=1.6.0)", "pexpect (>=4.8.0,<5)", "pytest-cov (>=2.10.1)", "pytest-helpers-namespace (>=2019.1.8)", "pytest-html (>=3.0.0)", "pytest-mock (>=3.3.1)", "pytest-plus (>=0.2)", "pytest-testinfra (>=6.1.0)", "pytest-verbose-parametrize (>=1.7.0)", "pytest-xdist (>=2.1.0)", "pytest (>=6.1.2)"]
+test = ["ansi2html (>=1.6.0)", "pexpect (>=4.8.0,<5)", "pytest-cov (>=2.10.1)", "pytest-html (>=3.0.0)", "pytest-mock (>=3.3.1)", "pytest-plus (>=0.2)", "pytest-testinfra (>=6.1.0)", "pytest-verbose-parametrize (>=1.7.0)", "pytest-xdist (>=2.1.0)", "pytest (>=6.1.2)"]
 windows = ["pywinrm"]
 
 [[package]]
@@ -655,7 +655,7 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7097e265c388500588d418022eb4ac758ab709639fffe157dfef9f723c6f7c06"
+content-hash = "2903df1b53af94162533db7320468c4853ba8b8350b183e74a1391d632a90cec"
 
 [metadata.files]
 ansible = [
@@ -868,8 +868,8 @@ markupsafe = [
     {file = "MarkupSafe-2.0.1.tar.gz", hash = "sha256:594c67807fb16238b30c44bdf74f36c02cdf22d1c8cda91ef8a0ed8dabf5620a"},
 ]
 molecule = [
-    {file = "molecule-3.3.4-py3-none-any.whl", hash = "sha256:a44c36bfc3734d561d941a90cf6ab18ede36e00decc92bd0f81623fa32dbdb2f"},
-    {file = "molecule-3.3.4.tar.gz", hash = "sha256:5794d0b39e695c4544c714ac90ab90901f22d8c9f623c2fee665b8b2dc2ce6cc"},
+    {file = "molecule-3.4.0-py3-none-any.whl", hash = "sha256:6aa2d659189908469c52b1eb5b3a88c1125f23448e23e27c227c5ec9d9063aa9"},
+    {file = "molecule-3.4.0.tar.gz", hash = "sha256:e9845e2e98a992a7d2e144c1148c6e7b7663ca3f8060ef0c01a373eda03abd9d"},
 ]
 molecule-docker = [
     {file = "molecule-docker-0.3.4.tar.gz", hash = "sha256:dc9a8ad60b70ede303805cd6865deb5fb9c162e67ff5e7d1a45eb7e58cd36b88"},
