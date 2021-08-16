@@ -10,7 +10,7 @@ python = "^3.9"
 [tool.poetry.dev-dependencies]
 molecule = {extras = ["docker"], version = "^3.4.0"}
 ansible-lint = "^5.1.2"
-yamllint = "^1.26.1"
+yamllint = "^1.26.2"
 ansible = "^4.4.0"
 
 [build-system]
