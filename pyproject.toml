@@ -11,7 +11,7 @@ python = "^3.9"
 molecule = {extras = ["docker"], version = "^3.3.4"}
 ansible-lint = "^5.1.2"
 yamllint = "^1.26.1"
-ansible = "^4.3.0"
+ansible = "^4.4.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
