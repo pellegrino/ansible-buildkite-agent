@@ -15,7 +15,7 @@ buildkite_agent_group: buildkite-agent
 buildkite_agent_home_path: /var/lib/buildkite-agent
 buildkite_agent_name: buildkite-agent
 buildkite_agent_config_path: /etc/buildkite-agent
-buildkite_agent_hooks_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/hooks"
+buildkite_agent_hooks_path: "{{ buildkite_agent_config_path }}/hooks"
 buildkite_agent_builds_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/builds"
 buildkite_agent_plugins_path: "{{ buildkite_agent_home_path }}/.buildkite-agent/plugins"
 buildkite_agent_bin_path: "{{ buildkite_agent_home_path }}/bin"
