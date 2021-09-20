@@ -8,7 +8,7 @@ authors = ["Vitor Pellegrino <vitor@pellegrino.io>"]
 python = "^3.9"
 
 [tool.poetry.dev-dependencies]
-molecule = {extras = ["docker"], version = "^3.4.0"}
+molecule = {extras = ["docker"], version = "^3.5.1"}
 ansible-lint = "^5.1.2"
 yamllint = "^1.26.3"
 ansible = "^4.5.0"
