@@ -40,7 +40,7 @@ resolvelib = ">=0.5.3,<0.6.0"
 
 [[package]]
 name = "ansible-lint"
-version = "5.2.1"
+version = "5.3.1"
 description = "Checks playbooks for practices and behaviour that could potentially be improved"
 category = "dev"
 optional = false
@@ -675,7 +675,7 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "f63b0aaec909abf9da2dbc48eb220054d61dc735c42cd0db227e43f40feb5a42"
+content-hash = "947bbfac7db9ccce6785388f63e0cbb620e2e91a214e8e7b49fafd1cdb120da6"
 
 [metadata.files]
 ansible = [
@@ -689,8 +689,8 @@ ansible-core = [
     {file = "ansible-core-2.11.5.tar.gz", hash = "sha256:7d3ce47014122907454704363485e48513f8ad0f00138b88870eb6d88953d121"},
 ]
 ansible-lint = [
-    {file = "ansible-lint-5.2.1.tar.gz", hash = "sha256:d64aca59c8d896541d379b9205b2126b851088aab0a2c2cab19ff74b184cdf1c"},
-    {file = "ansible_lint-5.2.1-py3-none-any.whl", hash = "sha256:92a6d3eda27691d1c8c8787bc6cc3fab76fe070ccd369b4a6fc187d93eab867f"},
+    {file = "ansible-lint-5.3.1.tar.gz", hash = "sha256:7d7bc74b9b90c5982be5c274c2afcba5b8073ec88cce793fab463fe6418a25f6"},
+    {file = "ansible_lint-5.3.1-py3-none-any.whl", hash = "sha256:4793ce6862ef7f85b3aaa7fa21887fd3e45bae43505640523c9b25928ac992de"},
 ]
 arrow = [
     {file = "arrow-1.1.1-py3-none-any.whl", hash = "sha256:77a60a4db5766d900a2085ce9074c5c7b8e2c99afeaa98ad627637ff6f292510"},
