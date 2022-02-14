@@ -11,7 +11,7 @@ ansible-core = ">=2.12.2,<2.13.0"
 
 [[package]]
 name = "ansible-compat"
-version = "0.5.0"
+version = "1.0.0"
 description = "Ansible compatibility goodies"
 category = "dev"
 optional = false
@@ -19,6 +19,7 @@ python-versions = ">=3.6"
 
 [package.dependencies]
 PyYAML = "*"
+subprocess-tee = ">=0.3.5"
 
 [package.extras]
 test = ["coverage", "flaky", "pip-tools", "pytest", "pytest-markdown", "pytest-mock", "pytest-plus"]
@@ -261,7 +262,7 @@ tls = ["pyOpenSSL (>=17.5.0)", "cryptography (>=3.4.7)", "idna (>=2.0.0)"]
 
 [[package]]
 name = "enrich"
-version = "1.2.6"
+version = "1.2.7"
 description = "enrich"
 category = "dev"
 optional = false
@@ -317,37 +318,35 @@ python-versions = ">=3.6"
 
 [[package]]
 name = "molecule"
-version = "3.5.2"
+version = "3.6.0"
 description = "Molecule aids in the development and testing of Ansible roles"
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 
 [package.dependencies]
-ansible-compat = ">=0.5.0"
+ansible-compat = ">=1.0.0"
 cerberus = ">=1.3.1,<1.3.3 || >1.3.3,<1.3.4 || >1.3.4"
 click = ">=8.0,<9"
 click-help-colors = ">=0.9"
 cookiecutter = ">=1.7.3"
-enrich = ">=1.2.5"
+enrich = ">=1.2.7"
 Jinja2 = ">=2.11.3"
 molecule-docker = {version = ">=1.0.0", optional = true, markers = "extra == \"docker\""}
 packaging = "*"
 paramiko = ">=2.5.0,<3"
 pluggy = ">=0.7.1,<2.0"
-PyYAML = ">=5.1,<6"
+PyYAML = ">=5.1"
 rich = ">=9.5.1"
-selinux = {version = "*", markers = "sys_platform == \"linux\" or sys_platform == \"linux2\""}
-subprocess-tee = ">=0.3.5"
 
 [package.extras]
 ansible = ["ansible (>=2.10)"]
 ansible-base = ["ansible-base (>=2.10)"]
 docker = ["molecule-docker (>=1.0.0)"]
-docs = ["Sphinx (>=4.0.2)", "simplejson (>=3.17.2)", "sphinx-ansible-theme (>=0.8.0,<0.9.0)", "sphinx-notfound-page (>=0.7.1)"]
+docs = ["Sphinx (>=4.3.2,<4.4.0)", "simplejson (>=3.17.2)", "sphinx-ansible-theme (>=0.8.0,<0.10.0)", "sphinx-notfound-page (>=0.7.1)"]
 lint = ["flake8 (>=3.8.4)", "pre-commit (>=2.10.1)", "yamllint"]
 podman = ["molecule-podman (>=1.0.1)"]
-test = ["ansi2html (>=1.6.0)", "pexpect (>=4.8.0,<5)", "pytest-cov (>=2.10.1)", "pytest-html (>=3.0.0)", "pytest-mock (>=3.3.1)", "pytest-plus (>=0.2)", "pytest-testinfra (>=6.1.0)", "pytest-xdist (>=2.1.0)", "pytest (>=6.1.2)"]
+test = ["ansi2html (>=1.6.0)", "coverage (>=6.2)", "filelock", "pexpect (>=4.8.0,<5)", "pytest-cov (>=2.10.1)", "pytest-html (>=3.0.0)", "pytest-mock (>=3.3.1)", "pytest-plus (>=0.2)", "pytest-testinfra (>=6.1.0)", "pytest-xdist (>=2.1.0)", "pytest (>=6.1.2)"]
 windows = ["pywinrm"]
 
 [[package]]
@@ -675,15 +674,15 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7918338eca8421b7f1e703a69b335f8756528a5622a56df11256a8b5b2321f03"
+content-hash = "1808d68b632ad455a19c5e070c85091ea47ee77bdd9b0fa948dcb4ceda44b5d6"
 
 [metadata.files]
 ansible = [
     {file = "ansible-5.3.0.tar.gz", hash = "sha256:50020dab43f6c59debdeb57f45c90ec6db78d4fa574edc6d75bc52e05cbd3639"},
 ]
 ansible-compat = [
-    {file = "ansible-compat-0.5.0.tar.gz", hash = "sha256:0730fbbb32710d19f4244a4cabad9c6b33b4b92ddf72aee353484e17543405f5"},
-    {file = "ansible_compat-0.5.0-py3-none-any.whl", hash = "sha256:3a696842689e108a827d3b60a1c32d53a546c94fe4fb244166259cbc25268c28"},
+    {file = "ansible-compat-1.0.0.tar.gz", hash = "sha256:2ade2acbd1d7868eeb602c682afe92bc8c05480333205c328b4c2a1b09f970a4"},
+    {file = "ansible_compat-1.0.0-py3-none-any.whl", hash = "sha256:8b9c9678e82c328df9574cd7eb3777e7f25cf1530bc48e612597213bc6e4bd0d"},
 ]
 ansible-core = [
     {file = "ansible-core-2.12.2.tar.gz", hash = "sha256:bc79e1723a5a92cbc105d581b25b66840d15bb5f4c98925c936ef5a71f92e7c3"},
@@ -823,8 +822,8 @@ docker = [
     {file = "docker-5.0.0.tar.gz", hash = "sha256:3e8bc47534e0ca9331d72c32f2881bb13b93ded0bcdeab3c833fb7cf61c0a9a5"},
 ]
 enrich = [
-    {file = "enrich-1.2.6-py3-none-any.whl", hash = "sha256:ed0b3ac33495cc95f1ccafaf6c7ec0a0fcabb20f7f7a90121f37eb83a85bf82b"},
-    {file = "enrich-1.2.6.tar.gz", hash = "sha256:0e99ff57d87f7b5def0ca79917e88fb9351aa0d52e228ee38bff7cd858315fe4"},
+    {file = "enrich-1.2.7-py3-none-any.whl", hash = "sha256:f29b2c8c124b4dbd7c975ab5c3568f6c7a47938ea3b7d2106c8a3bd346545e4f"},
+    {file = "enrich-1.2.7.tar.gz", hash = "sha256:0a2ab0d2931dff8947012602d1234d2a3ee002d9a355b5d70be6bf5466008893"},
 ]
 idna = [
     {file = "idna-3.2-py3-none-any.whl", hash = "sha256:14475042e284991034cb48e06f6851428fb14c4dc953acd9be9a5e95c7b6dd7a"},
@@ -910,8 +909,8 @@ markupsafe = [
     {file = "MarkupSafe-2.0.1.tar.gz", hash = "sha256:594c67807fb16238b30c44bdf74f36c02cdf22d1c8cda91ef8a0ed8dabf5620a"},
 ]
 molecule = [
-    {file = "molecule-3.5.2-py3-none-any.whl", hash = "sha256:b174c2974897791e1681723d16f3744700e071f6d1e3df9cf9a07d35c6df0552"},
-    {file = "molecule-3.5.2.tar.gz", hash = "sha256:c82af099e5c0998d7eb16a3bf65ed5a4edd97e3824fb938ce01bf064a46ce0ca"},
+    {file = "molecule-3.6.0-py3-none-any.whl", hash = "sha256:2ff4134a6b5da276a3eac67eb5214bedeb3b62575d8f9131e22e8f3551a0e63a"},
+    {file = "molecule-3.6.0.tar.gz", hash = "sha256:2efeeea8c0cdb6d987c9e6374725b99e745a669ff7489346e69ab7a62dc86448"},
 ]
 molecule-docker = [
     {file = "molecule-docker-1.0.2.tar.gz", hash = "sha256:a16f3bb734eb1d5ec28fa3bb678854bda7cb142968467fc8f4f31a518cd4555f"},
