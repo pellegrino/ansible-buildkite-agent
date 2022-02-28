@@ -1,6 +1,6 @@
 [[package]]
 name = "ansible"
-version = "5.3.0"
+version = "5.4.0"
 description = "Radically simple IT automation"
 category = "dev"
 optional = false
@@ -675,11 +675,11 @@ pyyaml = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "7918338eca8421b7f1e703a69b335f8756528a5622a56df11256a8b5b2321f03"
+content-hash = "8a46bb154083ec225002b6d73f02bc0d352e8182b9e00aae6d23a81ee655fba8"
 
 [metadata.files]
 ansible = [
-    {file = "ansible-5.3.0.tar.gz", hash = "sha256:50020dab43f6c59debdeb57f45c90ec6db78d4fa574edc6d75bc52e05cbd3639"},
+    {file = "ansible-5.4.0.tar.gz", hash = "sha256:2f0ecbd8a3232e520bf3e3bc23f40dda60b9ce7924ca194bd35f4de4027100fc"},
 ]
 ansible-compat = [
     {file = "ansible-compat-0.5.0.tar.gz", hash = "sha256:0730fbbb32710d19f4244a4cabad9c6b33b4b92ddf72aee353484e17543405f5"},
