@@ -24,7 +24,7 @@ jobs:
           python-version: "3.x"
 
       - name: Caches python packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: ~/.cache/pip
           key: ${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('**/pyproject.toml') }}
@@ -64,7 +64,7 @@ jobs:
           python-version: "3.x"
 
       - name: Caches python packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3.0.1
         with:
           path: ~/.cache/pip
           key: ${{ hashFiles('**/poetry.lock') }}-molecule-${{ hashFiles('**/pyproject.toml') }}
